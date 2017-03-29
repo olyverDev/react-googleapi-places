@@ -1,0 +1,80 @@
+* { 
+    margin:0; 
+    padding:0; 
+    } 
+   
+html, body {
+    height: 100%; 
+    margin: 0; padding: 0 
+      }
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+}       
+
+#searchField {
+    position: absolute;
+    top: 25%; 
+    left: 36%;
+
+    width: 20%;
+    height: 40%;
+    font-size: medium;
+    text-align: center;
+}
+
+.nameOfSite {
+    position: absolute;
+    top: 22%; 
+    left: 3.5%;
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#mapPageLink {
+    position: absolute;
+    top: 27%;
+    right: 10%;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+
+#root {
+    position: relative;
+
+    width: 100%; 
+    height: 100%;
+    background-color:white;
+
+}
+
+
+.footer {
+    position: fixed; 
+    left: 0;
+    bottom: 0;  
+
+    background: black; 
+    width: 100%; 
+    height: 40px;
+    border-top: 1px solid lightgoldenrodyellow;
+}
+
+#githubAccountLink {
+    position: absolute;
+    bottom: 25%;
+    right: 2%;
+    font-size: medium;
+    font-weight: bold;
+}
+
+#googleLogo {
+    position: absolute;
+    bottom: 26%;
+    left: 3%; 
+}
