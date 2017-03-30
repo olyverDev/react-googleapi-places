@@ -48,9 +48,112 @@ html, body {
     position: relative;
 
     width: 100%; 
-    height: 100%;
-    background-color:white;
+    min-height: 100%;
+    height: auto;
+    background-color: white;
 
+}
+
+#filter {
+    position: absolute;
+    width: 18%;
+    height: 350px;   
+}
+
+.staticText {
+    margin-left: 10%;
+    margin-bottom: 5%;
+
+    font-size: large;
+    font-weight: bold;
+}
+
+.filterElementsList li {
+    margin-bottom: 2%;
+    list-style-type: none; 
+
+    font-size: large;
+    font-weight: bolder;
+    color: gray;
+   }
+
+.filterElementsList {
+    margin-left: 24%;
+    margin-top: 6%;
+   }
+
+#resultTag {
+    width: auto;
+    min-height: 20px;
+    height: auto;
+    background-color: whitesmoke;
+}
+
+#resultText {
+    padding: 2px 2px 2px 2px;
+    font-size: medium;
+    font-weight: bold;
+    color: black;
+}
+
+#locationList {
+    position: absolute;
+    top: 8%; left: 22%; 
+    display: none;
+    width: 63.5%; 
+    height: auto;
+    border: 1px solid lightgrey;   
+    background-color: whitesmoke;
+
+}   
+
+.locationItem {
+    width: inherit;
+    margin-bottom: 4%;
+}
+
+.locationName, .locationAddress, .locationLatLng, .locationType {
+    margin-left: 25%;
+}
+
+.locationAddress {
+
+font-size: medium;
+text-decoration: none; 
+color: seagreen;
+}
+
+.locationName {
+font-weight: bolder;
+font-size: large;
+text-decoration: none;
+}
+
+.locationLatLng {
+    font-weight: lighter;
+    color: lightslategrey;
+}
+
+.locationType {
+    font-weight: lighter;   
+    color: rosybrown;  
+}
+
+.morePlacesTag {
+    position: fixed;
+    left: 12%; bottom: 7%;
+
+    font-size: x-large;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+#numberOfPlaces {
+    position: absolute;
+    left: 4%; 
+
+    color: gray;
+    font-size: large;
 }
 
 
