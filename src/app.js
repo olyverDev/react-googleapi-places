@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Filter from './components/filter'
 import LocationList from './components/locationList'
 import FilterResult from './components/filterResult'
+import LocationAutocomplete from './components/locationAutocomplete'
 
 export default class App extends Component {
     render () {
@@ -10,6 +11,7 @@ export default class App extends Component {
             <Filter />
             <LocationList />
             <FilterResult />
+            <LocationAutocomplete />
             </div>
         );
     }
