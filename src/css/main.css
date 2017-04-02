@@ -156,6 +156,32 @@ text-decoration: none;
     font-size: large;
 }
 
+#predictionsArea {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid lightgray;
+
+    z-index: 1;
+    display: none;
+    background-color: white;  
+}
+
+.predictionItem {
+    width: inherit;
+}
+
+.predictionItem :hover {
+      background-color: lightgray;
+}
+
+.predictionDescription {
+    margin-left: 36%;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: none;
+}
 
 .footer {
     position: fixed; 
