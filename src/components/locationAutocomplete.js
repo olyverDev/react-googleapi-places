@@ -6,8 +6,13 @@ const responseLanguage = 'en';
 export default class LocationAutocomplete extends Component {
   constructor(props) {
     super(props);
-    this.state = { predictions: [] };
+    this.state = {
+      predictions: []
+    };
     this.request = this.request.bind(this);
+    LocationAutocomplete.propTypes = {
+      handleClick: React.PropTypes.func,
+    };
   }
 
   request(e) {
@@ -36,11 +41,15 @@ export default class LocationAutocomplete extends Component {
       console.log('Date: ' + response.headers.get('Date'));
       return response.json()
     }).then((json) => {
-      this.setState({ predictions: json.predictions });
+      this.setState({
+        predictions: json.predictions,
+      });
     }).catch(function (err) {
       console.log('Fetch Error -', err);
     })
   }
+
+ 
 
   componentDidMount() {
     SEARCH_FIELD.addEventListener('input', this.request);
@@ -56,7 +65,7 @@ export default class LocationAutocomplete extends Component {
         {
           this.state.predictions.map((item, index) => (
             <div key={index} className='predictionItem' >
-              <a href='#' className='predictionDescription'> {item.description} </a>
+              <a rel={item.place_id} href='#' onClick={this.props.handleClick} className='predictionDescription'> {item.description} </a>
             </div>
           ))
         }
