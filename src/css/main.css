@@ -31,8 +31,13 @@ html, body {
     top: 22%; 
     left: 3.5%;
     color: white;
+    text-decoration: none;
     font-size: x-large;
     font-weight: bold;
+}
+
+.nameOfSite:hover {
+    text-decoration: underline;
 }
 
 #mapPageLink {
@@ -42,7 +47,6 @@ html, body {
     font-size: x-large;
     font-weight: bolder;
 }
-
 
 #root {
     position: relative;
@@ -83,33 +87,33 @@ html, body {
    }
 
 #resultTag {
+    position: absolute;
+    top: 45%;
     width: auto;
     min-height: 20px;
     height: auto;
-    background-color: whitesmoke;
+    z-index: 1;
 }
 
 #resultText {
-    padding: 2px 2px 2px 2px;
-    font-size: medium;
-    font-weight: bold;
-    color: black;
+    padding: 3px 3px 3px 3px;
+    font-size: large;
+    color: cornflowerblue;
 }
 
 #locationList {
     position: absolute;
-    top: 8%; left: 22%; 
+    top: 60%; left: 18%; 
     display: none;
-    width: 63.5%; 
+    width: 82%; 
     height: auto;
     border: 1px solid lightgrey;   
     background-color: whitesmoke;
-
+    margin-bottom: 5%;
 }   
 
 .locationItem {
     width: inherit;
-    margin-bottom: 4%;
 }
 
 .locationName, .locationAddress, .locationLatLng, .locationType {
@@ -117,16 +121,20 @@ html, body {
 }
 
 .locationAddress {
-
-font-size: medium;
-text-decoration: none; 
-color: seagreen;
+    font-size: medium;
+    text-decoration: none; 
+    color: seagreen;
 }
 
 .locationName {
-font-weight: bolder;
-font-size: large;
-text-decoration: none;
+    font-weight: bolder;
+    font-size: large;
+    color: cornflowerblue;
+    text-decoration: none;
+}
+
+.locationName:hover {
+    text-decoration: underline;
 }
 
 .locationLatLng {
@@ -141,11 +149,17 @@ text-decoration: none;
 
 .morePlacesTag {
     position: fixed;
-    left: 12%; bottom: 7%;
+    left: 89.7%; bottom: 7%;
+    margin-bottom: 0.5%;
 
     font-size: x-large;
     font-weight: bolder;
+    color: cornflowerblue;
     text-decoration: none;
+}
+
+.morePlacesTag:hover {
+    text-decoration: underline;
 }
 
 #numberOfPlaces {
@@ -173,14 +187,20 @@ text-decoration: none;
 }
 
 .predictionItem :hover {
-      background-color: lightgray;
+    background-color: whitesmoke;
 }
 
 .predictionDescription {
     margin-left: 36%;
     font-weight: bold;
     font-size: large;
+    color: cornflowerblue;
     text-decoration: none;
+
+}
+
+.predictionDescription:hover {
+    text-decoration: underline;
 }
 
 .footer {
@@ -194,16 +214,29 @@ text-decoration: none;
     border-top: 1px solid lightgoldenrodyellow;
 }
 
-#githubAccountLink {
+#githubRepositoryLink {
     position: absolute;
     bottom: 25%;
     right: 2%;
     font-size: medium;
-    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+#githubRepositoryLink:hover {
+    text-decoration: underline;
 }
 
 #googleLogo {
     position: absolute;
     bottom: 26%;
     left: 3%; 
+}
+
+#map {
+    height: 60%;
+    width: 82%;
+    position: absolute;
+    left: 18%;
+    border-left: 1px solid lightgrey;
 }
