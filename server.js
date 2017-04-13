@@ -57,7 +57,7 @@ app.post('/extraLocations', function (req, res) {
 app.post('/locationAutocomplete', function (req, res) {
   var foreignUrl = req.body.mainUrl +'input='+ req.body.input + '&language=' 
   + req.body.language + '&key=' + req.body.key;
-  console.log('hintsUrl: ' + foreignUrl)
+  console.log('hints Url: ' + foreignUrl)
   request(foreignUrl, function (error, response, body) {
     if (!error && response.statusCode == 200)
       res.send(body);
@@ -65,3 +65,14 @@ app.post('/locationAutocomplete', function (req, res) {
       console.log('Some error! Check internet connection');
   })
 });
+
+app.post('/locationData', (req,res) => {
+  var foreignUrl = req.body.mainUrl + 'place_id=' + req.body.placeid + '&key='+ req.body.key;
+  console.log('data url: '+ foreignUrl);
+  request(foreignUrl, function (error, response, body) {
+    if (!error && response.statusCode == 200)
+      res.send(body);
+      else 
+      console.log('Some error! Check internet connection');
+  })
+})
