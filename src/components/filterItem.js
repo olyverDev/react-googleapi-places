@@ -10,14 +10,14 @@ export default class FilterItem extends Component {
     }
 
     handleClick(e) {
-        if(!e.target.checked) {
-            this.setState ({
+        if (!e.target.checked) {
+            this.setState({
                 value: ''
             })
             this.value = this.state.value;
         }
         else {
-            this.setState ({
+            this.setState({
                 value: e.target.value
             })
             this.value = this.state.value;
