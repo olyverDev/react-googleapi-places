@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { GOOGLE_KEY, headers, DEFAULT_LAT_LNG } from '../constants/index.js'
 
-var currentLatLng;
+window.currentLatLng = '';
 var body;
 
 function getPosition(position) {
     currentLatLng = position.coords.latitude + ',' + position.coords.longitude;
-    console.log('latLng: ' + currentLatLng)
+    console.log('global latLng: ' + currentLatLng)
 }
 
 try {
@@ -27,6 +27,9 @@ export default class LocationList extends Component {
         }
         this.request = this.request.bind(this);
         this.extraRequest = this.extraRequest.bind(this);
+        LocationList.propTypes = {
+            handleClick: React.PropTypes.func,
+        };
     }
 
     request(e) {
@@ -135,31 +138,40 @@ export default class LocationList extends Component {
     }
 
     render() {
+
         if (this.state.locations.length > 0) {
             return (
-                <div id='locationList'>
-                    <LocationResultSummary
-                        number={this.state.locations.length}
-                        onClick={this.extraRequest}
-                        isNextPage={this.state.responseData.next_page_token} />
-                    {
-                        this.state.locations.map((item, index) => (
-                            <div key={index} className='locationItem' >
-                                <a href='#' className='locationName'>{item.name}</a>
-                                <p className='locationAddress'> {item.vicinity} </p>
-                                <p className='locationLatLng'>Coordinates: {' '}
-                                    {item.geometry.location.lat},{item.geometry.location.lng}</p>
-                                <p className='locationType'> {item.types[0]} </p>
-                            </div>
-                        ))
-                    }
+                <div>
+                    <div id='locationList'>
+                        <LocationResultSummary
+                            number={this.state.locations.length}
+                            onClick={this.extraRequest}
+                            isNextPage={this.state.responseData.next_page_token} />
+                        {
+                            this.state.locations.map((item, index) => (
+                                <div key={index} className='locationItem' >
+                                    <a rel={item.geometry.location.lat + '|' + item.geometry.location.lng + '|' + item.name + ', ' + item.vicinity}
+                                        href='#' onClick={this.props.handleClick} className='locationName'>{item.name}</a>
+                                    <p className='locationAddress'> {item.vicinity} </p>
+                                    <p className='locationLatLng'>Coordinates: {' '}
+                                        {item.geometry.location.lat},{item.geometry.location.lng}</p>
+                                    <p className='locationType'> {item.types[0]} </p>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
             );
         }
         else {
-            return <div id='locationList'> <p> loading... </p> </div>;
+            return (
+                <div id='locationList'>
+                    <p> loading... </p>
+                </div>
+            )
         }
     }
+
 }
 
 var LocationResultSummary = React.createClass({
