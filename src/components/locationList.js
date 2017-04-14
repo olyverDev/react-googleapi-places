@@ -33,7 +33,6 @@ export default class LocationList extends Component {
     }
 
     request(e) {
-        document.getElementById('locationList').style.display = 'block';
         if (e.target.type == 'radio') {
             this.setState({
                 radius: e.target.value
@@ -150,6 +149,7 @@ export default class LocationList extends Component {
                         {
                             this.state.locations.map((item, index) => (
                                 <div key={index} className='locationItem' >
+                                     <a name="locationListTop"> </a>
                                     <a rel={item.geometry.location.lat + '|' + item.geometry.location.lng + '|' + item.name + ', ' + item.vicinity}
                                         href='#' onClick={this.props.handleClick} className='locationName'>{item.name}</a>
                                     <p className='locationAddress'> {item.vicinity} </p>
@@ -165,8 +165,8 @@ export default class LocationList extends Component {
         }
         else {
             return (
-                <div id='locationList'>
-                    <p> loading... </p>
+                <div id='noLocationsBlock'>
+                    <p id='noLocationsText'> No locations </p>
                 </div>
             )
         }
@@ -189,7 +189,7 @@ var LocationResultSummary = React.createClass({
 
         if (isNextPage != null)
             showMore =
-                <a href="#pageTopTag" onClick={this.props.onClick}
+                <a href='#locationListTop' onClick={this.props.onClick}
                     className='morePlacesTag'> Load more </a>
 
         return (
