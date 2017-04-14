@@ -12,7 +12,7 @@ export default class GoogleMap extends Component {
         var infowindow = new google.maps.InfoWindow({
             content: nextProps.content
         });
-
+            
         var pos = { lat: nextProps.lat, lng: nextProps.lng }
         var marker = new google.maps.Marker({
             position: pos,
