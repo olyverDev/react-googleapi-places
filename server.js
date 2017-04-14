@@ -29,7 +29,7 @@ app.use(bp.urlencoded({
 }));
 
 app.get('*', function (req, res) {
-  res.status(404).send('error 404, page not found');
+  res.status(404).send('Error 404, page not found');
 });
 
 app.post('/locations', function (req, res) {
@@ -40,8 +40,10 @@ app.post('/locations', function (req, res) {
   request(foreignUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) 
       res.send(body);
-    else 
-      console.log('Some error! Check internet connection');
+    else {
+      console.log('Some error');
+      res.status(500).send('Internal server error');
+    }
   });
 });
 
@@ -51,6 +53,10 @@ app.post('/extraLocations', function (req, res) {
   request(foreignUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) 
       res.send(body);
+      else {
+        console.log('Some error');
+        res.status(500).send('Internal server error');
+      }
   })
 });
 
@@ -61,8 +67,10 @@ app.post('/locationAutocomplete', function (req, res) {
   request(foreignUrl, function (error, response, body) {
     if (!error && response.statusCode == 200)
       res.send(body);
-      else 
-      console.log('Some error! Check internet connection');
+      else {
+      console.log('Some error');
+      res.status(500).send('Internal server error');
+      }
   })
 });
 
@@ -72,7 +80,9 @@ app.post('/locationData', (req,res) => {
   request(foreignUrl, function (error, response, body) {
     if (!error && response.statusCode == 200)
       res.send(body);
-      else 
-      console.log('Some error! Check internet connection');
+      else {
+      console.log('Some error');
+      res.status(500).send('Internal server error');
+      }
   })
 })
