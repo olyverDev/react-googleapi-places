@@ -92,25 +92,39 @@ html, body {
     width: auto;
     min-height: 20px;
     height: auto;
+    background-color: whitesmoke;
     z-index: 1;
 }
 
 #resultText {
     padding: 3px 3px 3px 3px;
     font-size: large;
-    color: cornflowerblue;
+    color:black;
 }
 
 #locationList {
     position: absolute;
     top: 60%; left: 18%; 
-    display: none;
     width: 82%; 
     height: auto;
     border: 1px solid lightgrey;   
     background-color: whitesmoke;
     margin-bottom: 5%;
 }   
+
+#noLocationsBlock {
+    position: absolute;
+    top: 70%; left: 50%;
+    width: 10%;
+    border: 1px solid lightgrey;   
+    background-color: whitesmoke;
+}
+
+#noLocationsText {
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
 
 .locationItem {
     width: inherit;
