@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LocationAutocomplete from './locationAutocomplete'
 import LocationList from './locationList'
 import GoogleMap from './map'
-import { GOOGLE_KEY, headers } from '../constants/index.js'
+import { GOOGLE_KEY, headers, SEARCH_FIELD } from '../constants/index.js'
 
 export default class MapAndLocations extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ export default class MapAndLocations extends Component {
             e.target.rel + '&key=' + GOOGLE_KEY;
 
         document.getElementById('predictionsArea').style.display = 'none';
-
+        SEARCH_FIELD.value=e.target.text;
         fetch('/locationData',
             {
                 method: 'post',
