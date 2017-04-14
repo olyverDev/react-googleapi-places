@@ -64,7 +64,16 @@ export default class MapAndLocations extends Component {
     }
 
     componentDidMount() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
 
+                this.setState({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                    info: ''+position.coords.latitude +', '+ position.coords.longitude
+                })
+            });
+        }
     }
 
 
@@ -72,8 +81,8 @@ export default class MapAndLocations extends Component {
         return (
             <div>
                 <GoogleMap lat={this.state.lat} lng={this.state.lng} content={this.state.info} />
-                    <LocationAutocomplete handleClick={this.toMapAutocomplete.bind(this)} />
-                    <LocationList handleClick={this.toMap.bind(this)} />
+                <LocationAutocomplete handleClick={this.toMapAutocomplete.bind(this)} />
+                <LocationList handleClick={this.toMap.bind(this)} />
             </div>
         );
     }
