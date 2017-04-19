@@ -8,6 +8,7 @@ const request = require('request')
 const bp = require('body-parser')
 const app = express();
 const compiler = webpack(config);
+const googleKey = 'AIzaSyBXzTLkiIpYXc_I6D-XKPM7npbKQk0uhfE';
 
 app.use(webpackDevMiddleware(compiler,	
 {	
@@ -28,13 +29,22 @@ app.use(bp.urlencoded({
   extended: true
 }));
 
-app.get('*', function (req, res) {
-  res.status(404).send('Error 404, page not found');
-});
 
-app.post('/locations', function (req, res) {
-  var foreignUrl = req.body.mainUrl + 'location=' + req.body.location +
-    '&radius=' + req.body.radius + '&types=' + req.body.types + '&key=' + req.body.key;
+
+var error = function (req, res,next) {
+  res.status(400).send('Error 404');
+  next();
+};
+
+
+app.get ('/', (req,res) => {
+  res.sendFile('main.html', {root: __dirname+'/src'});
+})
+
+
+app.get('/locations', function (req, res) {
+  var foreignUrl = req.query.mainUrl + 'location=' + req.query.location +
+    '&radius=' + req.query.radius + '&types=' + req.query.types + '&key=' + googleKey;
   console.log('/locations url: ' + foreignUrl)
 
   request(foreignUrl, function (error, response, body) {
@@ -44,11 +54,12 @@ app.post('/locations', function (req, res) {
       console.log('Some error');
       res.status(500).send('Internal server error');
     }
+   
   });
 });
 
-app.post('/extraLocations', function (req, res) {
-  var foreignUrl = req.body.mainUrl + 'pagetoken=' + req.body.pagetoken + '&key=' + req.body.key;
+app.get('/extraLocations', function (req, res) {
+  var foreignUrl = req.query.mainUrl + 'pagetoken=' + req.query.pagetoken + '&key=' + googleKey;
   console.log('/extraLocations url: ' + foreignUrl)
   request(foreignUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) 
@@ -60,9 +71,9 @@ app.post('/extraLocations', function (req, res) {
   })
 });
 
-app.post('/locationAutocomplete', function (req, res) {
-  var foreignUrl = req.body.mainUrl +'input='+ req.body.input + '&language=' 
-  + req.body.language + '&key=' + req.body.key;
+app.get('/locationAutocomplete', function (req, res) {
+  var foreignUrl = req.query.mainUrl +'input='+ req.query.input + '&language=' 
+  + req.query.language + '&key=' + googleKey;
   console.log('hints Url: ' + foreignUrl)
   request(foreignUrl, function (error, response, body) {
     if (!error && response.statusCode == 200)
@@ -75,7 +86,7 @@ app.post('/locationAutocomplete', function (req, res) {
 });
 
 app.post('/locationData', (req,res) => {
-  var foreignUrl = req.body.mainUrl + 'place_id=' + req.body.placeid + '&key='+ req.body.key;
+  var foreignUrl = req.query.mainUrl + 'place_id=' + req.query.placeid + '&key='+ googleKey;
   console.log('data url: '+ foreignUrl);
   request(foreignUrl, function (error, response, body) {
     if (!error && response.statusCode == 200)
@@ -86,3 +97,4 @@ app.post('/locationData', (req,res) => {
       }
   })
 })
+
