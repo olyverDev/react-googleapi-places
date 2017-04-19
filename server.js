@@ -85,7 +85,7 @@ app.get('/locationAutocomplete', function (req, res) {
   })
 });
 
-app.post('/locationData', (req,res) => {
+app.get('/locationData', (req,res) => {
   var foreignUrl = req.query.mainUrl + 'place_id=' + req.query.placeid + '&key='+ googleKey;
   console.log('data url: '+ foreignUrl);
   request(foreignUrl, function (error, response, body) {
