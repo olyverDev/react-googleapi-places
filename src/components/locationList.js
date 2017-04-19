@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { GOOGLE_KEY, headers, DEFAULT_LAT_LNG } from '../constants/index.js'
+import { headers, DEFAULT_LAT_LNG } from '../constants/index.js'
 
 window.currentLatLng = '';
-var body;
 
 function getPosition(position) {
     currentLatLng = position.coords.latitude + ',' + position.coords.longitude;
@@ -33,6 +32,9 @@ export default class LocationList extends Component {
     }
 
     request(e) {
+
+        let url;
+
         if (e.target.type == 'radio') {
             this.setState({
                 radius: e.target.value
@@ -50,21 +52,17 @@ export default class LocationList extends Component {
         }
 
         if (currentLatLng != null)
-            body =
-                'mainUrl=https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location='
-                + currentLatLng + '&types=' + this.state.locationType + '&radius=' + this.state.radius
-                + '&key=' + GOOGLE_KEY;
+            url = '/locations?mainUrl=https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=' +
+                currentLatLng + '&types=' + this.state.locationType + '&radius=' + this.state.radius;
         else
-            body =
-                'mainUrl=https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location='
-                + DEFAULT_LAT_LNG + '&types=' + this.state.locationType + '&radius=' + this.state.radius
-                + '&key=' + GOOGLE_KEY;
+            url = '/locations?mainUrl=https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=' +
+                DEFAULT_LAT_LNG + '&types=' + this.state.locationType + '&radius=' + this.state.radius;
 
-        fetch('/locations',
+        fetch(url,
             {
-                method: 'post',
+                method: 'get',
                 headers: headers,
-                body: body
+
             }
         ).then((response) => {
             console.log('Requesting: ' + response.url);
@@ -88,11 +86,11 @@ export default class LocationList extends Component {
     }
 
     extraRequest(e) {
-        fetch('/extraLocations',
+        fetch('/extraLocations?mainUrl=https://maps.googleapis.com/maps/api/place/nearbysearch/json?&pagetoken='
+            + this.state.responseData.next_page_token,
             {
-                method: 'post',
-                headers: headers,
-                body: body + '&pagetoken=' + this.state.responseData.next_page_token
+                method: 'get',
+                headers: headers
             }).then((response) => {
                 console.log('Responding from ' + response.url);
                 if (response.status !== 200) {
@@ -149,7 +147,7 @@ export default class LocationList extends Component {
                         {
                             this.state.locations.map((item, index) => (
                                 <div key={index} className='locationItem' >
-                                     <a name="locationListTop"> </a>
+                                    <a name="locationListTop"> </a>
                                     <a rel={item.geometry.location.lat + '|' + item.geometry.location.lng + '|' + item.name + ', ' + item.vicinity}
                                         href='#' onClick={this.props.handleClick} className='locationName'>{item.name}</a>
                                     <p className='locationAddress'> {item.vicinity} </p>

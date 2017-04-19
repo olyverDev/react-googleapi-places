@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { GOOGLE_KEY, headers, SEARCH_FIELD } from '../constants/index.js'
-
-const responseLanguage = 'en';
+import { headers, SEARCH_FIELD, responseLanguage } from '../constants/index.js'
 
 export default class LocationAutocomplete extends Component {
   constructor(props) {
@@ -20,14 +18,13 @@ export default class LocationAutocomplete extends Component {
     if (e.target.value != '')
       document.getElementById('predictionsArea').style.display = 'block';
 
-    let body = 'mainUrl=https://maps.googleapis.com/maps/api/place/queryautocomplete/json?&input='
-      + e.target.value.toLowerCase() + '&key=' + GOOGLE_KEY + '&language=' + responseLanguage;
+    let url = '/locationAutocomplete?mainUrl=https://maps.googleapis.com/maps/api/place/queryautocomplete/json?&input='
+      + e.target.value.toLowerCase() + '&language=' + responseLanguage;
 
-    fetch('/locationAutocomplete',
+    fetch(url,
       {
-        method: 'post',
-        headers: headers,
-        body: body
+        method: 'get',
+        headers: headers
       }
     ).then((response) => {
       console.log('Requesting: ' + response.url);
@@ -49,7 +46,6 @@ export default class LocationAutocomplete extends Component {
     })
   }
 
- 
 
   componentDidMount() {
     SEARCH_FIELD.addEventListener('input', this.request);

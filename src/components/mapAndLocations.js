@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LocationAutocomplete from './locationAutocomplete'
 import LocationList from './locationList'
 import GoogleMap from './map'
-import { GOOGLE_KEY, headers, SEARCH_FIELD } from '../constants/index.js'
+import { headers, SEARCH_FIELD } from '../constants/index.js'
 
 export default class MapAndLocations extends Component {
     constructor(props) {
@@ -24,16 +24,15 @@ export default class MapAndLocations extends Component {
 
     toMapAutocomplete(e) {
 
-        let body = 'mainUrl=https://maps.googleapis.com/maps/api/place/details/json?&placeid=' +
-            e.target.rel + '&key=' + GOOGLE_KEY;
+        let url = '/locationData?mainUrl=https://maps.googleapis.com/maps/api/place/details/json?&placeid=' +
+            e.target.rel;
 
         document.getElementById('predictionsArea').style.display = 'none';
         SEARCH_FIELD.value=e.target.text;
-        fetch('/locationData',
+        fetch(url,
             {
-                method: 'post',
+                method: 'get',
                 headers: headers,
-                body: body
             }
         ).then((response) => {
             console.log('Requesting: ' + response.url);
