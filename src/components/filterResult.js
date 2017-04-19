@@ -9,18 +9,17 @@ export default class FilterResult extends Component {
     }
 
     request(e) {
-     
-            if (!e.target.checked)
-                this.setState((prevState, props) => ({
-                    tag: prevState.tag.replace(' #'+e.target.name, '')
-                }));
-            else
-                this.setState((prevState, props) => ({
-                    tag: prevState.tag + ' #' + e.target.name
-                }));
-        }
-    
-    componentDidMount () {
+
+        if (!e.target.checked)
+            this.setState((prevState, props) => ({
+                tag: prevState.tag.replace(' #'+e.target.name, '')
+            }));
+        else
+            this.setState((prevState, props) => ({
+                tag: prevState.tag + ' #' + e.target.name
+            }));
+    }
+      componentDidMount () {
         document.getElementById('shops').addEventListener('click', this.request);
         document.getElementById('medicine').addEventListener('click', this.request);
         document.getElementById('entertainment').addEventListener('click', this.request);
@@ -31,7 +30,7 @@ export default class FilterResult extends Component {
     render() {
         return (
             <div id='resultTag'>
-            <p id='resultText'> {this.state.tag} </p> 
+                <p id='resultText'> {this.state.tag} </p>
             </div>
         )
     }
