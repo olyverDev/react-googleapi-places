@@ -26,6 +26,11 @@ html, body {
     text-align: center;
 }
 
+#searchField:focus {
+    background: whitesmoke;
+    border: 3px solid cornflowerblue;
+}
+
 .nameOfSite {
     position: absolute;
     top: 22%; 
